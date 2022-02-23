@@ -1,14 +1,24 @@
 from datetime import date
+from botcommands import commands
 from bot_config.properties import *
 from bot_config.messages import *
+
 import telebot
 import gspread
 from aiogram import types
 
-#приветствуем пользователя и рассказываем о боте
-@bot.message_handler(commands=['start', 'help'])
+
+#приветствуем пользователя и рассказываем о бот
 def send_welcome(message):
-    bot.reply_to(message,startMesssage)
+    return send_welcome(message)
+
+@bot.message_handler(commands=['returnItem'])
+def list(message):
+    bot.send_message(message.chat.id, 'Вот список ваших заказов:')
+    sh = gc.open_by_key(googlesheet_id)
+    for items in sh.sheet1.col_values(2):
+        bot.send_message(message.chat.id, items)
+
 
 
 @bot.message_handler(content_types=["text"])
