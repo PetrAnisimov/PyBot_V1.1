@@ -9,3 +9,7 @@ bot_token = "5117456487:AAGPJIKWZPwfe2Crx36BIjWrmcJ0eMvOmDs"
 
 bot = telebot.TeleBot(bot_token)
 gc = gspread.service_account()
+
+#название столбцов
+rowItem = 2
+rowPrice = 3
